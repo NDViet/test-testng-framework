@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="UploadTest" verbose="1">
+    <test name="uploadFile">
+        <classes>
+            <class name="io.EasyUpload.UploadTest"/>
+        </classes>
+    </test>
+</suite>

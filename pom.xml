@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>io.github.ndviet</groupId>
         <artifactId>test-parent-pom</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${revision}</version>
         <relativePath>../test-parent-pom/pom.xml</relativePath>
     </parent>
 
@@ -44,21 +44,25 @@
     </scm>
 
     <properties>
-        <revision>1.0.0-SNAPSHOT</revision>
         <github.repository>test-testng-framework</github.repository>
-        <!--suppress UnresolvedMavenProperty -->
+        <skipTests>true</skipTests>
+        <includes>EasyUpload_io.xml</includes>
+        <!--suppress UnresolvedMavenProperty - Property 'custom.timestamp' is created when initializing-->
         <outputDirectory>${project.build.directory}/reports/${custom.timestamp}</outputDirectory>
-        <screenshotsDirectory>${outputDirectory}/Screenshots</screenshotsDirectory>
-        <configuration.base>${project.basedir}/src/test/resources/configuration/baseConfiguration.yaml
-        </configuration.base>
-        <configuration.ordering1>${project.basedir}/src/test/resources/configuration/seleniumConfiguration.yaml
-        </configuration.ordering1>
-        <configuration.ordering2>${project.basedir}/src/test/resources/configuration/input_java_opts.properties
-        </configuration.ordering2>
+        <selenium.screenshot.directory>${outputDirectory}/Screenshots</selenium.screenshot.directory>
+        <!-- Properties for Test Configuration files (precedence level: system props -> ordering<N> -> base) -->
+        <configuration.directory>${project.basedir}/src/test/resources/configuration</configuration.directory>
+        <configuration.base>${configuration.directory}/baseConfiguration.yaml</configuration.base>
+        <configuration.ordering1>${configuration.directory}/seleniumConfiguration.yaml</configuration.ordering1>
+        <configuration.ordering2>${configuration.directory}/input_java_opts.properties</configuration.ordering2>
         <testObjectRepository.directory>${project.basedir}/src/test/resources/Object_Repository
         </testObjectRepository.directory>
-        <testObjectRepository.webIdentifiers>Web_Identifiers</testObjectRepository.webIdentifiers>
+        <webElementIdentifiers.directory>${testObjectRepository.directory}/Web_Identifiers
+        </webElementIdentifiers.directory>
+        <testData.directory>${testObjectRepository.directory}/Test_Data</testData.directory>
         <log4j2.configurationFile>file:///${basedir}/src/test/resources/log4j2.properties</log4j2.configurationFile>
+        <log4j2.path>${outputDirectory}</log4j2.path>
+        <applicationContextPath>spring/application-context.xml</applicationContextPath>
     </properties>
 
     <dependencies>
@@ -83,22 +87,47 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M8</version>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/suites/EasyUpload_io.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
             </plugin>
 
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>${skipTests}</skipTests>
+                    <systemPropertyVariables>
+                        <!--suppress UnresolvedMavenProperty - Property 'custom.timestamp' is created when initializing-->
+                        <outputDirectory>${project.build.directory}/reports/${custom.timestamp}</outputDirectory>
+                        <selenium.screenshot.directory>${outputDirectory}/Screenshots</selenium.screenshot.directory>
+                        <!-- Properties for Test Configuration files (precedence level: system props -> ordering<N> -> base) -->
+                        <configuration.directory>${project.basedir}/src/test/resources/configuration
+                        </configuration.directory>
+                        <configuration.base>${configuration.directory}/baseConfiguration.yaml</configuration.base>
+                        <configuration.ordering1>${configuration.directory}/seleniumConfiguration.yaml
+                        </configuration.ordering1>
+                        <configuration.ordering2>${configuration.directory}/input_java_opts.properties
+                        </configuration.ordering2>
+                        <testObjectRepository.directory>${project.basedir}/src/test/resources/Object_Repository
+                        </testObjectRepository.directory>
+                        <webElementIdentifiers.directory>${testObjectRepository.directory}/Web_Identifiers
+                        </webElementIdentifiers.directory>
+                        <testData.directory>${testObjectRepository.directory}/Test_Data</testData.directory>
+                        <log4j2.configurationFile>file:///${basedir}/src/test/resources/log4j2.properties
+                        </log4j2.configurationFile>
+                        <log4j2.path>${outputDirectory}</log4j2.path>
+                        <applicationContextPath>spring/application-context.xml</applicationContextPath>
+                    </systemPropertyVariables>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/suites/${includes}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
