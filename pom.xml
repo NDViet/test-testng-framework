@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.github.ndviet</groupId>
+        <groupId>org.ndviet</groupId>
         <artifactId>test-parent-pom</artifactId>
         <version>${revision}</version>
         <relativePath>../test-parent-pom/pom.xml</relativePath>
@@ -72,12 +72,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.github.ndviet</groupId>
+            <groupId>org.ndviet</groupId>
             <artifactId>test-libraries-utilities</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>io.github.ndviet</groupId>
+            <groupId>org.ndviet</groupId>
             <artifactId>test-libraries-webui</artifactId>
             <classifier>shaded</classifier>
             <version>${revision}</version>

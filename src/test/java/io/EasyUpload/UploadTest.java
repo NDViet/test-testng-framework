@@ -1,17 +1,17 @@
 package io.EasyUpload;
 
-import com.ndviet.library.BrowserManagement;
-import com.ndviet.library.TakeScreenshot;
-import com.ndviet.library.WebUI;
+import org.ndviet.library.BrowserManagement;
+import org.ndviet.library.TakeScreenshot;
+import org.ndviet.library.WebUI;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import static com.ndviet.library.TestObject.ObjectRepository.findTestObject;
-import static com.ndviet.library.configuration.Constants.TEST_DATA_DIRECTORY;
-import static com.ndviet.library.file.FileHelpers.getPath;
+import static org.ndviet.library.TestObject.ObjectRepository.findTestObject;
+import static org.ndviet.library.configuration.Constants.TEST_DATA_DIRECTORY;
+import static org.ndviet.library.file.FileHelpers.getPath;
 
 public class UploadTest {
     @BeforeMethod
