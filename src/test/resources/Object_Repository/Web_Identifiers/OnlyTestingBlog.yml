@@ -1,0 +1,7 @@
+Only Testing Blog:
+  Choose File: //input[@type="file"]
+  Submit Button: //input[@id="submitButton"]
+  Available Country: //select[@name="FromLB"]//option[normalize-space()="${value}"]
+  Selected Country: //select[@name="ToLB"]//option[normalize-space()="${value}"]
+  Add Country Button: //input[@value="->"]
+  Remove Country Button: //input[@value="<-"]
