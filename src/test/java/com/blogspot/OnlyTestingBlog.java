@@ -4,6 +4,7 @@ import org.ndviet.library.BrowserManagement;
 import org.ndviet.library.WebUI;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -14,9 +15,10 @@ import static org.ndviet.library.configuration.Constants.TEST_DATA_DIRECTORY;
 import static org.ndviet.library.file.FileHelpers.getPath;
 
 public class OnlyTestingBlog {
+    @Parameters("browser")
     @BeforeMethod
-    public void beforeTest() {
-        BrowserManagement.getInstance().openBrowser("http://only-testing-blog.blogspot.com/2013/09/test.html");
+    public void beforeTest(String browser) {
+        BrowserManagement.getInstance().openBrowser(browser, "http://only-testing-blog.blogspot.com/2013/09/test.html");
     }
 
     @AfterMethod

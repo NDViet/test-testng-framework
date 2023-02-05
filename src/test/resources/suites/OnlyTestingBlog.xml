@@ -1,8 +1,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="OnlyTestingBlog" verbose="1">
-    <test name="BasicTest">
+<suite name="OnlyTestingBlog" parallel="methods" thread-count="2">
+    <test name="ChromeTest">
+        <parameter name="browser" value="chrome" />
         <classes>
-            <class name="com.blogspot.OnlyTestingBlog"/>
+            <class name="com.blogspot.OnlyTestingBlog" />
+        </classes>
+    </test>
+    <test name="FirefoxTest">
+        <parameter name="browser" value="firefox" />
+        <classes>
+            <class name="com.blogspot.OnlyTestingBlog" />
         </classes>
     </test>
 </suite>
