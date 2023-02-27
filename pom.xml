@@ -45,7 +45,7 @@
 
     <properties>
         <github.repository>test-testng-framework</github.repository>
-        <skipTests>true</skipTests>
+        <skipTests>false</skipTests>
         <includes>EasyUpload_io.xml</includes>
         <!--suppress UnresolvedMavenProperty - Property 'custom.timestamp' is created when initializing-->
         <outputDirectory>${project.build.directory}/reports/${custom.timestamp}</outputDirectory>
