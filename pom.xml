@@ -79,7 +79,6 @@
         <dependency>
             <groupId>org.ndviet</groupId>
             <artifactId>test-libraries-webui</artifactId>
-            <classifier>shaded</classifier>
             <version>${revision}</version>
         </dependency>
         <dependency>
@@ -111,25 +110,21 @@
                     <skipTests>${skipTests}</skipTests>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty - Property 'custom.timestamp' is created when initializing-->
-                        <outputDirectory>${project.build.directory}/reports/${custom.timestamp}</outputDirectory>
-                        <selenium.screenshot.directory>${outputDirectory}/Screenshots</selenium.screenshot.directory>
+                        <outputDirectory>${outputDirectory}</outputDirectory>
+                        <selenium.screenshot.directory>${selenium.screenshot.directory}</selenium.screenshot.directory>
                         <!-- Properties for Test Configuration files (precedence level: system props -> ordering<N> -> base) -->
-                        <configuration.directory>${project.basedir}/src/test/resources/configuration
-                        </configuration.directory>
-                        <configuration.base>${configuration.directory}/baseConfiguration.yaml</configuration.base>
-                        <configuration.ordering1>${configuration.directory}/seleniumConfiguration.yaml
-                        </configuration.ordering1>
-                        <configuration.ordering2>${configuration.directory}/input_java_opts.properties
-                        </configuration.ordering2>
-                        <testObjectRepository.directory>${project.basedir}/src/test/resources/Object_Repository
+                        <configuration.directory>${configuration.directory}</configuration.directory>
+                        <configuration.base>${configuration.base}</configuration.base>
+                        <configuration.ordering1>${configuration.ordering1}</configuration.ordering1>
+                        <configuration.ordering2>${configuration.ordering2}</configuration.ordering2>
+                        <testObjectRepository.directory>${testObjectRepository.directory}
                         </testObjectRepository.directory>
-                        <webElementIdentifiers.directory>${testObjectRepository.directory}/Web_Identifiers
+                        <webElementIdentifiers.directory>${webElementIdentifiers.directory}
                         </webElementIdentifiers.directory>
-                        <testData.directory>${testObjectRepository.directory}/Test_Data</testData.directory>
-                        <log4j2.configurationFile>file:///${basedir}/src/test/resources/log4j2.properties
-                        </log4j2.configurationFile>
-                        <log4j2.path>${outputDirectory}</log4j2.path>
-                        <applicationContextPath>spring/application-context.xml</applicationContextPath>
+                        <testData.directory>${testData.directory}</testData.directory>
+                        <log4j2.configurationFile>${log4j2.configurationFile}</log4j2.configurationFile>
+                        <log4j2.path>${log4j2.path}</log4j2.path>
+                        <applicationContextPath>${applicationContextPath}</applicationContextPath>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/suites/${includes}</suiteXmlFile>
