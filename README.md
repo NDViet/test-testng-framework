@@ -12,13 +12,13 @@ Test repository with test case is created and executed in TestNG Framework.<br>
 1. Clone repository "test-parent-pom" (**mandatory**)
 
 ```shell
-git clone git@github.com:vietnd96/test-parent-pom.git
+git clone git@github.com:ndviet/test-parent-pom.git
 ```
 
 2. Clone this test repository to the same directory
 
 ```shell
-git clone git@github.com:vietnd96/test-testng-framework.git
+git clone git@github.com:ndviet/test-testng-framework.git
 ```
 
 3. Build source code in each repository following the order
