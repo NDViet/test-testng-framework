@@ -1,6 +1,5 @@
 package io.EasyUpload;
 
-import org.ndviet.library.BrowserManagement;
 import org.ndviet.library.TakeScreenshot;
 import org.ndviet.library.WebUI;
 import org.testng.annotations.AfterMethod;
@@ -16,12 +15,12 @@ import static org.ndviet.library.file.FileHelpers.getPath;
 public class UploadTest {
     @BeforeMethod
     public void beforeTest() {
-        BrowserManagement.getInstance().openBrowser("https://easyupload.io/");
+        WebUI.openBrowser("https://easyupload.io/");
     }
 
     @AfterMethod
     public void afterTest() {
-        BrowserManagement.getInstance().closeBrowser();
+        WebUI.closeBrowser();
     }
 
     @Test

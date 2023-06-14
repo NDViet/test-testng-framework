@@ -1,6 +1,5 @@
 package com.blogspot;
 
-import org.ndviet.library.BrowserManagement;
 import org.ndviet.library.WebUI;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,12 +17,12 @@ public class OnlyTestingBlog {
     @Parameters("browser")
     @BeforeMethod
     public void beforeTest(String browser) {
-        BrowserManagement.getInstance().openBrowser(browser, "http://only-testing-blog.blogspot.com/2013/09/test.html");
+        WebUI.openBrowser(browser, "http://only-testing-blog.blogspot.com/2013/09/test.html");
     }
 
     @AfterMethod
     public void afterTest() {
-        BrowserManagement.getInstance().closeBrowser();
+        WebUI.closeBrowser();
     }
 
     @Test
