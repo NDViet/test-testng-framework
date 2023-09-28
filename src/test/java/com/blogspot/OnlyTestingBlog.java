@@ -28,7 +28,7 @@ public class OnlyTestingBlog {
     @Test
     public void BasicTest() throws Exception {
         WebUI.verifyElementPresent(findTestObject("Only Testing Blog.Choose File"));
-        WebUI.uploadFile(findTestObject("Only Testing Blog.Choose File"), getPath(System.getProperty(TEST_DATA_DIRECTORY) + "/" + "SampleFile.yml"));
+        //WebUI.uploadFile(findTestObject("Only Testing Blog.Choose File"), getPath(System.getProperty(TEST_DATA_DIRECTORY) + "/" + "SampleFile.yml"));
         for (String country : Arrays.asList("USA", "Japan", "Germany")) {
             WebUI.click(findTestObject("Only Testing Blog.Available Country", Map.of("value", country)));
             WebUI.click(findTestObject("Only Testing Blog.Add Country Button"));

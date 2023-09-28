@@ -7,7 +7,7 @@ selenium:
   default:
     timeOut: 15
   hub:
-    url: "http://testops.ndviet.org:4444"
+    url: "http://testops.ndviet.org/selenium"
   browser:
     type: chrome
     chrome:
