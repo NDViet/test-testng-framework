@@ -34,6 +34,7 @@ cd test-testng-framework
 
 ```shell
 mvn test -DskipTests=false -Dincludes="EasyUpload_io.xml"
+mvn test -DskipTests=false -Dincludes="OnlyTestingBlog.xml"
 ```
 
 Noted:
