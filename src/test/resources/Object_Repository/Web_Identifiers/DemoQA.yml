@@ -1,0 +1,3 @@
+DemoQA:
+  UploadDownload:
+    btnDownload: xpath=//a[contains(text(), "Download")]

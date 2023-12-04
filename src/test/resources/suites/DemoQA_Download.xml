@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="DemoQA_Download" parallel="methods" thread-count="1">
+    <test name="ChromeTest">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.demoqa.DownloadTest"/>
+        </classes>
+    </test>
+</suite>
