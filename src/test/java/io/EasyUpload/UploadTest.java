@@ -29,7 +29,7 @@ public class UploadTest {
         TakeScreenshot.capturePageScreenshot(null);
         WebUI.uploadFile(findTestObject("Easy Upload.Upload.File"), getPath(System.getProperty(TEST_DATA_DIRECTORY) + "/" + "SampleFile.yml"));
         WebUI.click(findTestObject("Easy Upload.Upload.Settings.Expiration Dropdown"));
-        WebUI.click(findTestObject("Easy Upload.Upload.Settings.Option", Map.of("value", "1 days")));
+        WebUI.click(findTestObject("Easy Upload.Upload.Settings.Option", Map.of("value", "1 day")));
         TakeScreenshot.capturePageScreenshot(null);
         WebUI.click(findTestObject("Easy Upload.Upload.Submit Button"));
         TakeScreenshot.capturePageScreenshot(null);
