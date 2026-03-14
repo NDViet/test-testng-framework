@@ -1,0 +1,92 @@
+name: TestNG UI (Container Grid)
+
+on:
+  workflow_dispatch:
+    inputs:
+      testng_suite:
+        description: "TestNG suite XML file (example: EasyUpload_io.xml)"
+        required: false
+        default: "EasyUpload_io.xml"
+      browser:
+        description: "Browser type for remote Selenium run"
+        required: false
+        default: "chrome"
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/testng-ui-container.yml"
+      - "src/**"
+      - "pom.xml"
+      - "run-in-container.sh"
+      - "containers/docker-compose.selenium-grid.yml"
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  ui-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      TEST_IMAGE: ${{ vars.DOCKERHUB_JAVA_COMMON_IMAGE || 'ndviet/test-automation-java-common:latest' }}
+      TESTNG_SUITE: ${{ github.event_name == 'workflow_dispatch' && inputs.testng_suite || 'EasyUpload_io.xml' }}
+      BROWSER: ${{ github.event_name == 'workflow_dispatch' && inputs.browser || 'chrome' }}
+      MAVEN_OFFLINE: "true"
+      MAVEN_NO_SNAPSHOT_UPDATES: "true"
+      MAVEN_AUTO_FALLBACK_ONLINE: "true"
+    steps:
+      - name: Checkout test-testng-framework
+        uses: actions/checkout@v4
+        with:
+          path: test-testng-framework
+
+      - name: Ensure runner script is executable
+        run: chmod +x test-testng-framework/run-in-container.sh
+
+      - name: Configure Maven settings for GitHub Packages
+        shell: bash
+        run: |
+          mkdir -p "${HOME}/.m2"
+          cat > "${HOME}/.m2/settings.xml" <<EOF
+          <settings>
+            <servers>
+              <server>
+                <id>github-test-parent-pom</id>
+                <username>${GITHUB_ACTOR}</username>
+                <password>${GITHUB_TOKEN}</password>
+              </server>
+              <server>
+                <id>github-test-automation-fwk</id>
+                <username>${GITHUB_ACTOR}</username>
+                <password>${GITHUB_TOKEN}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Execute UI tests in shared container image
+        run: ./test-testng-framework/run-in-container.sh
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload TestNG HTML reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testng-html-reports
+          if-no-files-found: warn
+          path: test-testng-framework/target/reports
+
+      - name: Upload Surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          if-no-files-found: warn
+          path: test-testng-framework/target/surefire-reports

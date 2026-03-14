@@ -7,8 +7,8 @@
     <parent>
         <groupId>org.ndviet</groupId>
         <artifactId>test-parent-pom</artifactId>
-        <version>${revision}</version>
-        <relativePath>../test-parent-pom/pom.xml</relativePath>
+        <version>26.3.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <artifactId>test-testng-framework</artifactId>
@@ -44,6 +44,8 @@
     </scm>
 
     <properties>
+        <revision>26.3.0-SNAPSHOT</revision>
+        <test-automation-fwk.version>26.3.0-SNAPSHOT</test-automation-fwk.version>
         <github.repository>test-testng-framework</github.repository>
         <skipTests>true</skipTests>
         <includes>EasyUpload_io.xml</includes>
@@ -65,6 +67,60 @@
         <applicationContextPath>spring/application-context.xml</applicationContextPath>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>github-test-parent-pom</id>
+            <name>GitHub Maven - test-parent-pom</name>
+            <url>https://maven.pkg.github.com/NDViet/test-parent-pom</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>github-test-automation-fwk</id>
+            <name>GitHub Maven - test-automation-fwk</name>
+            <url>https://maven.pkg.github.com/NDViet/test-automation-fwk</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>github-test-parent-pom</id>
+            <name>GitHub Maven - test-parent-pom</name>
+            <url>https://maven.pkg.github.com/NDViet/test-parent-pom</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>github-test-automation-fwk</id>
+            <name>GitHub Maven - test-automation-fwk</name>
+            <url>https://maven.pkg.github.com/NDViet/test-automation-fwk</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
@@ -74,12 +130,12 @@
         <dependency>
             <groupId>org.ndviet</groupId>
             <artifactId>test-libraries-utilities</artifactId>
-            <version>${revision}</version>
+            <version>${test-automation-fwk.version}</version>
         </dependency>
         <dependency>
             <groupId>org.ndviet</groupId>
             <artifactId>test-libraries-webui</artifactId>
-            <version>${revision}</version>
+            <version>${test-automation-fwk.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
