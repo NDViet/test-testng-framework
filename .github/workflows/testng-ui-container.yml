@@ -36,6 +36,8 @@ jobs:
       MAVEN_OFFLINE: "true"
       MAVEN_NO_SNAPSHOT_UPDATES: "true"
       MAVEN_AUTO_FALLBACK_ONLINE: "true"
+      GH_MAVEN_USERNAME: ${{ secrets.GH_PACKAGES_USERNAME != '' && secrets.GH_PACKAGES_USERNAME || github.actor }}
+      GH_MAVEN_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN != '' && secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout test-testng-framework
         uses: actions/checkout@v4
@@ -45,35 +47,21 @@ jobs:
       - name: Ensure runner script is executable
         run: chmod +x test-testng-framework/run-in-container.sh
 
-      - name: Configure Maven settings for GitHub Packages
-        shell: bash
-        run: |
-          mkdir -p "${HOME}/.m2"
-          cat > "${HOME}/.m2/settings.xml" <<EOF
-          <settings>
-            <servers>
-              <server>
-                <id>github-test-parent-pom</id>
-                <username>${GITHUB_ACTOR}</username>
-                <password>${GITHUB_TOKEN}</password>
-              </server>
-              <server>
-                <id>github-test-automation-fwk</id>
-                <username>${GITHUB_ACTOR}</username>
-                <password>${GITHUB_TOKEN}</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
-        env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up JDK 17 and Maven settings
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          server-id: github
+          server-username: GH_MAVEN_USERNAME
+          server-password: GH_MAVEN_TOKEN
 
       - name: Execute UI tests in shared container image
         run: ./test-testng-framework/run-in-container.sh
         env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ env.GH_MAVEN_USERNAME }}
+          GITHUB_TOKEN: ${{ env.GH_MAVEN_TOKEN }}
 
       - name: Upload TestNG HTML reports
         if: always()

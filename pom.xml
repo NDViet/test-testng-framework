@@ -69,22 +69,9 @@
 
     <repositories>
         <repository>
-            <id>github-test-parent-pom</id>
-            <name>GitHub Maven - test-parent-pom</name>
-            <url>https://maven.pkg.github.com/NDViet/test-parent-pom</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>github-test-automation-fwk</id>
-            <name>GitHub Maven - test-automation-fwk</name>
-            <url>https://maven.pkg.github.com/NDViet/test-automation-fwk</url>
+            <id>github</id>
+            <name>GitHub Maven - NDViet</name>
+            <url>https://maven.pkg.github.com/NDViet/*</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -98,20 +85,9 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>github-test-parent-pom</id>
-            <name>GitHub Maven - test-parent-pom</name>
-            <url>https://maven.pkg.github.com/NDViet/test-parent-pom</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>github-test-automation-fwk</id>
-            <name>GitHub Maven - test-automation-fwk</name>
-            <url>https://maven.pkg.github.com/NDViet/test-automation-fwk</url>
+            <id>github</id>
+            <name>GitHub Maven - NDViet</name>
+            <url>https://maven.pkg.github.com/NDViet/*</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
